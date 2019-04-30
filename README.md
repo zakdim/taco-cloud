@@ -13,8 +13,8 @@ https://github.com/habuma/spring-in-action-5-samples
 ### Create branch from master ###
 ```
 # create new branch jpa-entities and switch to it
-git checkout -b jpa-entities
+git checkout -b ch02-init
 
 # push new branch to github
-git push -u origin jpa-entities
+git push -u origin ch02-init
 ```
