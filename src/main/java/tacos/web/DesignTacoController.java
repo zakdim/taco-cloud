@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.extern.slf4j.Slf4j;
 import tacos.Ingredient;
 import tacos.Ingredient.Type;
+import tacos.Taco;
 
 @Slf4j
 @Controller
@@ -39,7 +40,7 @@ public class DesignTacoController {
 					filterByType(ingredients, type));
 		}
 		
-//		model.addAttribute("design", new Taco());
+		model.addAttribute("design", new Taco());
 		
 		return "design";	// view template name
 	}
