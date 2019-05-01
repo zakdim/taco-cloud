@@ -7,7 +7,7 @@ https://github.com/habuma/spring-in-action-5-samples
 ### Run from command line ###
 
 ```
-./mvnw spring-boot:run
+mvn spring-boot:run
 ```
 
 ### Create branch from master ###
