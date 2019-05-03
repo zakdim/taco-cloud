@@ -53,14 +53,13 @@
 		<br />
 
 		<h3>Here's how I'll pay...</h3>
-		<!-- tag::validatedField[] -->
-		<label for="ccNumber">Credit Card #: </label> <input type="text"
-			th:field="*{ccNumber}" />
-		<!-- end::allButValidation[] -->
-		<span class="validationError" th:if="${#fields.hasErrors('ccNumber')}"
+
+		<label for="ccNumber">Credit Card #: </label> 
+		<input type="text" th:field="*{ccNumber}" />
+		<span class="validationError" 
+			th:if="${#fields.hasErrors('ccNumber')}"
 			th:errors="*{ccNumber}">CC Num Error</span>
-		<!-- tag::allButValidation[] -->
-		<!-- end::validatedField[] -->
+
 		<br /> <label for="ccExpiration">Expiration: </label> <input
 			type="text" th:field="*{ccExpiration}" />
 		<!-- end::allButValidation[] -->
