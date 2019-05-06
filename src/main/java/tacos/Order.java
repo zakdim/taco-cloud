@@ -1,4 +1,3 @@
-// tag::allButDetailProperties[]
 package tacos;
 
 import java.io.Serializable;
