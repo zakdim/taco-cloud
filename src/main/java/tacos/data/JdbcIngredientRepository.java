@@ -16,7 +16,8 @@ import org.springframework.stereotype.Repository;
 import tacos.Ingredient;
 
 @Repository
-public class JdbcIngredientRepository implements IngredientRepository {
+public class JdbcIngredientRepository 
+	implements IngredientRepository {
 
 	private JdbcTemplate jdbc;
 	
@@ -48,7 +49,8 @@ public class JdbcIngredientRepository implements IngredientRepository {
 	}
 	
 	
-	private Ingredient mapRowToIngredient(ResultSet rs, int rowNum) throws SQLException {
+	private Ingredient mapRowToIngredient(ResultSet rs, int rowNum) 
+			throws SQLException {
 		return new Ingredient(
 				rs.getString("id"), 
 				rs.getString("name"), 
