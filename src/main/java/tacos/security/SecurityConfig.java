@@ -29,7 +29,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/design", "/orders")
 					.access("hasRole('ROLE_USER')")
-				.antMatchers("/", "/**").access("permitAll");
+				.antMatchers("/", "/**").access("permitAll")
+				
+				.and()
+					.formLogin()
+						.loginPage("/login")
+//						.loginProcessingUrl("/authenticate")
+//						.usernameParameter("user")
+//						.passwordParameter("pwd")
+//						.defaultSuccessUrl("/design")
+				
+				.and()
+					.logout()
+						.logoutSuccessUrl("/")
+						
+				// Make H2-Console non-secured; for debug purposes
+				.and()
+					.csrf()
+						.ignoringAntMatchers("/h2-console/**")
+						
+				// Allow pages to be loaded in frames from the same origin; needed for H2-Console
+				.and()  
+					.headers()
+						.frameOptions()
+					    	.sameOrigin()
+				;
 				
 	}
 	

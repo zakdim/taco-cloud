@@ -26,3 +26,5 @@ insert into Ingredient (id, name, type)
                 values ('SRCR', 'Sour Cream', 'SAUCE');
 insert into Ingredient (id, name, type) 
                 values ('SPCY', 'Spicy', 'SAUCE');
+                
+	 
