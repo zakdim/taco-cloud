@@ -29,21 +29,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/design", "/orders")
 					.access("hasRole('ROLE_USER')")
-				.antMatchers("/", "/**").access("permitAll");
+				.antMatchers("/", "/**").access("permitAll")
+				
+			.and()
+				.formLogin()
+					.loginPage("/login")
+					
+			.and()
+				.logout()
+					.logoutSuccessUrl("/")
+					
+			// Make H2-Console non-secured; for debug purposes
+			.and()
+	        	.csrf()
+	        		.ignoringAntMatchers("/h2-console/**")					
+
+	        // Allow pages to be loaded in frames from the same origin; needed for H2-Console
+			.and()
+				.headers()
+					.frameOptions()
+						.sameOrigin()
+			;
 				
 	}
-	
-//	protected void configure(HttpSecurity http) throws Exception {
-//		http
-//			.authorizeRequests()
-//				.antMatchers("/design", "/orders")
-//					.access("hasRole('ROLE_USER') && " +
-//							"T(java.util.Calendar).getInstance().get(" +
-//							"T(java.util.Calendar).DAY_OF_WEEK == " +
-//							"T(java.util.Calendar).TUESDAY")
-//				.antMatchers("/", "/**").access("permitAll");
-//				
-//	}
 
 	@SuppressWarnings("deprecation")
 	@Bean
@@ -52,7 +60,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+	protected void configure(AuthenticationManagerBuilder auth) 
+			throws Exception {
+		
 		auth
 			.userDetailsService(userDetailsService)
 			.passwordEncoder(encoder());

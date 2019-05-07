@@ -11,7 +11,7 @@ import tacos.data.IngredientRepository;
 
 @Component
 public class IngredientByIdConverter 
-	implements Converter<String, Ingredient> {
+		implements Converter<String, Ingredient> {
 	
 	private IngredientRepository ingredientRepo;	
 
