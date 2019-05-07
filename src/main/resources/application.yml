@@ -1,10 +1,19 @@
+taco:
+  orders:
+    pageSize: 10
+                 
+logging:
+  level:
+    tacos: WARN    
+
 spring:
   jpa:
     show-sql: true
     
-logging:
-  level:
-    tacos: WARN    
+#  security:
+#    user:
+#      name: buzz
+#      password: infinity
 
 #logging:
 #  path: /var/logs
