@@ -1,0 +1,32 @@
+spring:
+  jpa:
+    show-sql: true
+    
+logging:
+  level:
+    tacos: WARN    
+
+#logging:
+#  path: /var/logs
+#  file: TacoCloud.log
+#  level:
+#    root: WARN
+#    org.springframework.security: DEBUG
+    
+#  datasource:
+#    url: jdbc:mysql://localhost/tacocloud
+#    username: tacouser
+#    password: tacopassword
+#    driver-class-name: com.mysql.jdbc.Driver
+#    schema:
+#    - order-schema.sql
+#    - ingredient-schema.sql
+#    - taco-schema.sql
+#    - user-schema.sql
+#    data:
+#    - ingredients.sql
+#    jndi-name: java:/comp/env/jdbc/tacoCloudDS
+    
+# 5.1.3 - Configuring the embedded server
+#server:
+#  port: 0
