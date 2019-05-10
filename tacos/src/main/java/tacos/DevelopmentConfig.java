@@ -34,6 +34,7 @@ public class DevelopmentConfig {
 				Ingredient jack = new Ingredient("JACK", "Monterrey Jack", Type.CHEESE);
 				Ingredient salsa = new Ingredient("SLSA", "Salsa", Type.SAUCE);
 				Ingredient sourCream = new Ingredient("SRCR", "Sour Cream", Type.SAUCE);
+				Ingredient spicy = new Ingredient("SPCY", "Spicy", Type.SAUCE);
 				repo.save(flourTortilla);
 				repo.save(cornTortilla);
 				repo.save(groundBeef);
@@ -44,6 +45,7 @@ public class DevelopmentConfig {
 				repo.save(jack);
 				repo.save(salsa);
 				repo.save(sourCream);
+				repo.save(spicy);
 
 				userRepo.save(new User("habuma", encoder.encode("password"), "Craig Walls", "123 North Street",
 						"Cross Roads", "TX", "76227", "123-123-1234"));
