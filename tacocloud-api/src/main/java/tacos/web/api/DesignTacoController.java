@@ -66,24 +66,42 @@ public class DesignTacoController {
     //	}
 
     @GetMapping("/recent")
-    public Resources<Resource<Taco>> recentTacos() {
+    public Resources<TacoResource> recentTacos() {
         PageRequest page = PageRequest.of(
-                0, 12, Sort.by("createdAt").descending());
-        
+                0, 12, Sort.by("createdAt").descending());       
         List<Taco> tacos = tacoRepo.findAll(page).getContent();
-        Resources<Resource<Taco>> recentResources = Resources.wrap(tacos);
+        
+        List<TacoResource> tacoResources = 
+        		new TacoResourceAssembler().toResources(tacos);
+        Resources<TacoResource> recentResources = 
+        		new Resources<TacoResource>(tacoResources);
         
         recentResources.add(
                 linkTo(methodOn(DesignTacoController.class).recentTacos())
-                .withRel("recents"));
+                .withRel("recents"));       
         
+        return recentResources;
+    }
+    
+//    @GetMapping("/recent")
+//    public Resources<Resource<Taco>> recentTacos() {
+//        PageRequest page = PageRequest.of(
+//                0, 12, Sort.by("createdAt").descending());
+//        
+//        List<Taco> tacos = tacoRepo.findAll(page).getContent();
+//        Resources<Resource<Taco>> recentResources = Resources.wrap(tacos);
+//        
+//        recentResources.add(
+//                linkTo(methodOn(DesignTacoController.class).recentTacos())
+//                .withRel("recents"));
+//        
 //        recentResources.add(
 //                ControllerLinkBuilder.linkTo(DesignTacoController.class)
 //                                     .slash("recent")
 //                                     .withRel("recents"));
-        
-        return recentResources;
-    }
+//        
+//        return recentResources;
+//    }
     
 //    @GetMapping("/recent")
 //    public Resources<Resource<Taco>> recentTacos() {
