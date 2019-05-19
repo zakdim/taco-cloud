@@ -38,7 +38,10 @@ public class RecentTacosController {
 		Resources<TacoResource> recentResources = 
 				new Resources<TacoResource>(tacoResources);
 
-		recentResources.add(linkTo(methodOn(RecentTacosController.class).recentTacos()).withRel("recents"));
+		recentResources.add(
+				linkTo(methodOn(RecentTacosController.class).recentTacos())
+				.withRel("recents"));
+		
 		return new ResponseEntity<>(recentResources, HttpStatus.OK);
 	}
 }
