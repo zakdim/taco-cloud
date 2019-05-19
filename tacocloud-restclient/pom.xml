@@ -5,11 +5,11 @@
           http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>tacocloud-api</artifactId>
+	<artifactId>tacocloud-restclient</artifactId>
 	<packaging>jar</packaging>
 
-	<name>tacocloud-api</name>
-	<description>Taco Cloud API</description>
+	<name>tacocloud-restclient</name>
+	<description>Taco Cloud REST client</description>
 
 	<parent>
 		<groupId>sia</groupId>
@@ -27,17 +27,7 @@
 		<!-- TacoCloud dependencies -->
 		<dependency>
 			<groupId>sia</groupId>
-			<artifactId>tacocloud-data</artifactId>
-			<version>${tacocloud.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>sia</groupId>
 			<artifactId>tacocloud-domain</artifactId>
-			<version>${tacocloud.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>sia</groupId>
-			<artifactId>tacocloud-security</artifactId>
 			<version>${tacocloud.version}</version>
 		</dependency>
 
@@ -46,16 +36,18 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-rest</artifactId>
-		</dependency>
 
 		<!-- Lombok -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
+		</dependency>
+
+		<!-- Misc -->
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
 		</dependency>
 
 		<!-- Test dependencies -->
@@ -67,4 +59,12 @@
 
 	</dependencies>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
 </project>
