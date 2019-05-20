@@ -46,7 +46,8 @@ public class OrderApiController {
 	}
 
 	@PatchMapping(path = "/{orderId}", consumes = "application/json")
-	public Order patchOrder(@PathVariable("orderId") Long orderId, @RequestBody Order patch) {
+	public Order patchOrder(@PathVariable("orderId") Long orderId,
+							@RequestBody Order patch) {
 
 		Order order = repo.findById(orderId).get();
 		if (patch.getDeliveryName() != null) {

@@ -4,11 +4,14 @@ import java.net.URI;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.client.Traverson;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -17,15 +20,18 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import lombok.extern.slf4j.Slf4j;
 import tacos.Ingredient;
+import tacos.Taco;
 
 @Service
 @Slf4j
 public class TacoCloudClient {
 
 	private RestTemplate rest;
+	private Traverson traverson;
 
-	public TacoCloudClient(RestTemplate rest) {
+	public TacoCloudClient(RestTemplate rest, Traverson traverson) {
 		this.rest = rest;
+		this.traverson = traverson;
 	}
 
 	//
@@ -129,14 +135,59 @@ public class TacoCloudClient {
 //	}
 
 	public Ingredient createIngredient(Ingredient ingredient) {
-		ResponseEntity<Ingredient> responseEntity = 
-				rest.postForEntity("http://localhost:8080/ingredients", 
-						ingredient, Ingredient.class);
-		
-		log.info("New resource created at " + 
-				responseEntity.getHeaders().getLocation());
-		
+		ResponseEntity<Ingredient> responseEntity = rest.postForEntity("http://localhost:8080/ingredients", ingredient,
+				Ingredient.class);
+
+		log.info("New resource created at " + responseEntity.getHeaders().getLocation());
+
 		return responseEntity.getBody();
 	}
+
+	//
+	// Traverson with RestTemplate examples
+	//
+
+	public Iterable<Ingredient> getAllIngredientsWithTraverson() {
+		ParameterizedTypeReference<Resources<Ingredient>> ingredientType = new ParameterizedTypeReference<Resources<Ingredient>>() {
+		};
+
+		Resources<Ingredient> ingredientRes = traverson.follow("ingredients").toObject(ingredientType);
+
+		Collection<Ingredient> ingredients = ingredientRes.getContent();
+
+		return ingredients;
+	}
+	
+	public Ingredient addIngredient(Ingredient ingredient) {
+		String ingredientsUrl = traverson
+				.follow("ingredients")
+				.asLink()
+				.getHref();
+		// this url does not work for post: http://localhost:8080/api/ingredients
+		log.info(String.format("ingredientsUrl=%s", ingredientsUrl));
+		ingredientsUrl = "http://localhost:8080/ingredients";
+		
+		return rest.postForObject(
+				ingredientsUrl, ingredient, Ingredient.class);
+	}
+
+	public Iterable<Taco> getRecentTacosWithTraverson() {
+		ParameterizedTypeReference<Resources<Taco>> tacoType = new ParameterizedTypeReference<Resources<Taco>>() {
+		};
+
+		Resources<Taco> tacoRes = traverson
+				.follow("tacos")
+				.follow("recents")
+				.toObject(tacoType);
+
+		// Alternatively, list the two paths in the same call to follow()
+//		    Resources<Taco> tacoRes =
+//		        traverson
+//		          .follow("tacos", "recents")
+//		          .toObject(tacoType);
+
+		return tacoRes.getContent();
+	}
+
 
 }

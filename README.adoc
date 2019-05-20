@@ -57,4 +57,15 @@ http://localhost:8080/api/users
 http://localhost:8080/api/users/search/findByUsername?username=habuma
 ----
 
+=== Chapter 7
+
+To build a single specific module with its dependencies only:
+
+----
+mvn clean package -pl tacocloud-restclient -am
+----
+
+See https://stackoverflow.com/questions/1114026/maven-modules-building-a-single-specific-module[stackoverflow]
+
+
 

@@ -55,7 +55,7 @@ public class IngredientController {
 		Ingredient saved = repo.save(ingredient);
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(URI.create(
-				"http://localhost:8080/api/ingredients/" + ingredient.getId()));
+				"http://localhost:8080/ingredients/" + ingredient.getId()));
 		
 		return new ResponseEntity<>(saved, headers, HttpStatus.CREATED);
 	}
