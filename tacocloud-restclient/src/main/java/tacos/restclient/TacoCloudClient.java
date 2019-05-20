@@ -89,11 +89,9 @@ public class TacoCloudClient {
 	}
 
 	public List<Ingredient> getAllIngredients() {
-		return rest.exchange(
-				"http://localhost:8080/ingredients", 
-				HttpMethod.GET, null,
-				new ParameterizedTypeReference<List<Ingredient>>() {})
-				.getBody();
+		return rest.exchange("http://localhost:8080/ingredients", HttpMethod.GET, null,
+				new ParameterizedTypeReference<List<Ingredient>>() {
+				}).getBody();
 	}
 
 	//
@@ -101,8 +99,23 @@ public class TacoCloudClient {
 	//
 	public void updateIngredient(Ingredient ingredient) {
 		rest.put("http://localhost:8080/ingredients/{id}",
-				ingredient, 
+				ingredient, ingredient.getId());
+	}
+
+	//
+	// DELETE examples
+	//
+	public void deleteIngredient(Ingredient ingredient) {
+		rest.delete("http://localhost:8080/ingredients/{id}", 
 				ingredient.getId());
 	}
 
+	//
+	// POST examples
+	//
+	public Ingredient createIngredient(Ingredient ingredient) {
+		return rest.postForObject(
+				"http://localhost:8080/ingredients",
+				ingredient, Ingredient.class);
+	}
 }
