@@ -72,28 +72,37 @@ public class TacoCloudClient {
 //		
 //		return rest.getForObject(url, Ingredient.class);
 //	}
-	
+
 	/*
 	 * Use getForEntity() instead of getForObject()
 	 */
 	public Ingredient getIngredientById(String ingredientId) {
-		ResponseEntity<Ingredient> responseEntity = 
-				rest.getForEntity("http://localhost:8080/ingredients/{id}",
+		ResponseEntity<Ingredient> responseEntity = rest.getForEntity("http://localhost:8080/ingredients/{id}",
 				Ingredient.class, ingredientId);
-		
-		LocalDateTime fetchTime = LocalDateTime.ofInstant(
-				Instant.ofEpochMilli(responseEntity.getHeaders().getDate()),
+
+		LocalDateTime fetchTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(responseEntity.getHeaders().getDate()),
 				ZoneId.systemDefault());
-		
+
 		log.info(String.format("Fetched time: %s", fetchTime));
-		
+
 		return responseEntity.getBody();
 	}
-	
+
 	public List<Ingredient> getAllIngredients() {
-		return rest.exchange("http://localhost:8080/ingredients", 
-				HttpMethod.GET, null, 
+		return rest.exchange(
+				"http://localhost:8080/ingredients", 
+				HttpMethod.GET, null,
 				new ParameterizedTypeReference<List<Ingredient>>() {})
-			.getBody();
+				.getBody();
 	}
+
+	//
+	// PUT examples
+	//
+	public void updateIngredient(Ingredient ingredient) {
+		rest.put("http://localhost:8080/ingredients/{id}",
+				ingredient, 
+				ingredient.getId());
+	}
+
 }

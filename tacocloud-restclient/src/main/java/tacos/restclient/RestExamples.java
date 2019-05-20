@@ -41,4 +41,16 @@ public class RestExamples {
 		};
 	}
 
+	@Bean
+	public CommandLineRunner putAnIngredient(TacoCloudClient tacoCloudClient) {
+		return args -> {
+			log.info("----------------------- PUT -------------------------");
+			Ingredient before = tacoCloudClient.getIngredientById("LETC");
+			log.info("BEFORE:  " + before);
+			tacoCloudClient.updateIngredient(
+					new Ingredient("LETC", "Shredded Lettuce", Ingredient.Type.VEGGIES));
+			Ingredient after = tacoCloudClient.getIngredientById("LETC");
+			log.info("AFTER:  " + after);
+		};
+	}
 }
