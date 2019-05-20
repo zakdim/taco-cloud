@@ -98,24 +98,45 @@ public class TacoCloudClient {
 	// PUT examples
 	//
 	public void updateIngredient(Ingredient ingredient) {
-		rest.put("http://localhost:8080/ingredients/{id}",
-				ingredient, ingredient.getId());
+		rest.put("http://localhost:8080/ingredients/{id}", ingredient, ingredient.getId());
 	}
 
 	//
 	// DELETE examples
 	//
 	public void deleteIngredient(Ingredient ingredient) {
-		rest.delete("http://localhost:8080/ingredients/{id}", 
-				ingredient.getId());
+		rest.delete("http://localhost:8080/ingredients/{id}", ingredient.getId());
 	}
 
 	//
 	// POST examples
 	//
+//	public Ingredient createIngredient(Ingredient ingredient) {
+//		return rest.postForObject(
+//				"http://localhost:8080/ingredients", 
+//				ingredient, Ingredient.class);
+//	}
+
+	/*
+	 * Alternate implementations... The next two methods are alternative
+	 * implementations of createIngredient() as shown in chapter 7. If you'd like to
+	 * try any of them out, comment out the previous method and uncomment the
+	 * variant you want to use.
+	 */
+//	public URI createIngredient(Ingredient ingredient) {
+//		return rest.postForLocation("http://localhost:8080/ingredients",
+//				ingredient, Ingredient.class);
+//	}
+
 	public Ingredient createIngredient(Ingredient ingredient) {
-		return rest.postForObject(
-				"http://localhost:8080/ingredients",
-				ingredient, Ingredient.class);
+		ResponseEntity<Ingredient> responseEntity = 
+				rest.postForEntity("http://localhost:8080/ingredients", 
+						ingredient, Ingredient.class);
+		
+		log.info("New resource created at " + 
+				responseEntity.getHeaders().getLocation());
+		
+		return responseEntity.getBody();
 	}
+
 }

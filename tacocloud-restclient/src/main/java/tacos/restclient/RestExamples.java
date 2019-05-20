@@ -1,5 +1,6 @@
 package tacos.restclient;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.boot.CommandLineRunner;
@@ -54,12 +55,26 @@ public class RestExamples {
 	}
 
 	@Bean
+	public CommandLineRunner addAnIngredient(TacoCloudClient tacoCloudClient) {
+		return args -> {
+			log.info("----------------------- POST -------------------------");
+			Ingredient chix = new Ingredient("CHIX", "Shredded Chicken", Ingredient.Type.PROTEIN);
+			Ingredient chixAfter = tacoCloudClient.createIngredient(chix);
+			log.info("AFTER=1:  " + chixAfter);
+//			Ingredient beefFajita = new Ingredient("BFFJ", "Beef Fajita", Ingredient.Type.PROTEIN);
+//			URI uri = tacoCloudClient.createIngredient(beefFajita);
+//			log.info("AFTER-2:  " + uri);
+//			Ingredient shrimp = new Ingredient("SHMP", "Shrimp", Ingredient.Type.PROTEIN);
+//			Ingredient shrimpAfter = tacoCloudClient.createIngredient(shrimp);
+//			log.info("AFTER-3:  " + shrimpAfter);
+		};
+	}
+
+	@Bean
 	public CommandLineRunner deleteAnIngredient(TacoCloudClient tacoCloudClient) {
 		return args -> {
 			log.info("----------------------- DELETE -------------------------");
 			// start by adding a few ingredients so that we can delete them later...
-			Ingredient chix = new Ingredient("CHIX", "Chicken", Ingredient.Type.PROTEIN);
-			tacoCloudClient.createIngredient(chix);
 			Ingredient beefFajita = new Ingredient("BFFJ", "Beef Fajita", Ingredient.Type.PROTEIN);
 			tacoCloudClient.createIngredient(beefFajita);
 			Ingredient shrimp = new Ingredient("SHMP", "Shrimp", Ingredient.Type.PROTEIN);
