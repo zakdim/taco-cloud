@@ -1,8 +1,8 @@
-= Taco Cloud v0.0.7
+= Taco Cloud v0.0.8
 
-This folder contains the source code for the Taco Cloud sample from Spring in Action, 5th edition, as presented in Chapter 7.
+This folder contains the source code for the Taco Cloud sample from Spring in Action, 5th edition, as presented in Chapter 8.
 
-There may be portions of the application that are not fully functional (yet), but the code that is relevant to chapter 7 should be complete and ready to run.
+There may be portions of the application that are not fully functional (yet), but the code that is relevant to chapter 8 should be complete and ready to run.
 
 It's also important to note that example code tends to evolve throughout the course of a chapter. Moreover, there are often many different variants of a given piece of code presented. The sample code given here may only represent one such variant or evolution.
 
@@ -19,14 +19,14 @@ Once the project is built, you can run the executable JAR file from the `tacos` 
 
 [source,sh]
 ----
-% java -jar tacos/target/taco-cloud-0.0.7-SNAPSHOT.jar
+% java -jar tacos/target/taco-cloud-0.0.8-SNAPSHOT.jar
 ----
 
 Once the application has started, open your web browser and navigate to http://localhost:8080 to see the Taco Cloud home page.
 
 == Kicking the tires
 
-As mentioned above, not all of the Taco Cloud application is fully functional (yet). But the components that pertain to the topic of Chapter 6, defining a REST API, as well as client-side code from Chapter 7 should be in place.
+As mentioned above, not all of the Taco Cloud application is fully functional (yet). But the components that pertain to the topic of Chapters 6 and 7, as well as relevant code from Chapter 8 pertaining to sending and receiving messages should be in place.
 
 From the home page, you should be able to view some recently created tacos by clicking on "Latest designs" link at the top. The "Specials" and "Locations" links will navigate to their respective pages, but those pages are (for now) empty.
 
@@ -39,7 +39,7 @@ The three most prominent pieces that still need to be fixed are:
  - Security isn't working yet, so there's no login page.
  - Likewise, there's not yet any way to register.
 
-These will be certainly be sorted out eventually, but priority was placed on writing code that demonstrated the subject of Chapter 7.
+These will be certainly be sorted out eventually, but priority was placed on writing code that demonstrated the subject of Chapter 8.
 
 == Taco Cloud modules
 
@@ -48,6 +48,10 @@ The multi-module Maven project is made up of the following modules:
  - `tacocloud-api` : The REST API
  - `tacocloud-data` : The persistence module
  - `tacocloud-domain` : The domain types
+ - `tacocloud-kitchen` : An application to be run in the Taco Cloud kitchen that will receive orders for kitchen staff to prepare.
+ - `tacocloud-messaging-jms` : The Taco Cloud messaging module that sends messages using JMS.
+ - `tacocloud-messaging-kafka` : The Taco Cloud messaging module that sends messages using Kafka.
+ - `tacocloud-messaging-rabbitmq` : The Taco Cloud messaging module that sends messages using RabbitMQ.
  - `tacocloud-restclient` : Client code that consumes the API exposed from `tacocloud-api`.
  - `tacocloud-security` : The security module (TODO: Not fully functional yet.)
  - `tacocloud-ui` : A Typescript Angular UI
@@ -60,7 +64,7 @@ Assuming that the Taco Cloud application has been built and is running, you can 
 
 [source,sh]
 ----
-% java -jar tacocloud-restclient/target/tacocloud-restclient-0.0.7-SNAPSHOT.jar
+% java -jar tacocloud-restclient/target/tacocloud-restclient-0.0.8-SNAPSHOT.jar
 ----
 
 Review the source code in the `tacocloud-restclient` folder as you run the client to understand what is being emitted to the console.

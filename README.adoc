@@ -2,9 +2,9 @@
 
 https://www.manning.com/books/spring-in-action-fifth-edition[spring-in-action-fifth-edition @ Manning]
 
-== Taco Cloud Example Application - Chapter 7
+== Taco Cloud Example Application - Chapter 8
 
-https://github.com/habuma/spring-in-action-5-samples/tree/master/ch07[spring-in-action-5-samples @ GitHub]
+https://github.com/habuma/spring-in-action-5-samples/tree/master/ch08[spring-in-action-5-samples @ GitHub]
 
 === Run from command line 
 
@@ -67,5 +67,22 @@ mvn clean package -pl tacocloud-restclient -am
 
 See https://stackoverflow.com/questions/1114026/maven-modules-building-a-single-specific-module[stackoverflow]
 
+=== Chapter 8
 
+Apache ActiveMQ Artemis
 
+* https://activemq.apache.org/components/artemis/download/[Download]
+
+* https://activemq.apache.org/components/artemis/documentation/latest/using-server.html[Using the Server]
+
+* Start broker instance:
+
+----
+/var/lib/mybroker/bin/artemis run
+----
+
+* Stop broker instance:
+
+----
+/var/lib/mybroker/bin/artemis stop
+----
