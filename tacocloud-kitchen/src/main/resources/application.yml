@@ -1,6 +1,11 @@
 server:
   port: 8081
 
+spring:
+  rabbitmq:
+    template:
+      receive-timeout: 30000
+
 ---
 spring:
   profiles: jms-template, jms-listener
