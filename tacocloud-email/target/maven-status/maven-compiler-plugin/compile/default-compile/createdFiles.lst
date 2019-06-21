@@ -1,1 +1,9 @@
+tacos/email/TacoOrderEmailIntegrationConfig.class
+tacos/email/EmailToOrderTransformer.class
+tacos/email/Taco.class
+tacos/email/EmailProperties.class
+tacos/email/Ingredient.class
+tacos/email/TacoEmailApplication.class
+tacos/email/OrderSubmitMessageHandler.class
 tacos/email/ApiProperties.class
+tacos/email/Order.class

@@ -1,3 +1,9 @@
 /Users/dmitri/Learn/spring/sia5/taco-cloud/tacocloud-email/src/main/java/tacos/email/TacoEmailApplication.java
+/Users/dmitri/Learn/spring/sia5/taco-cloud/tacocloud-email/src/main/java/tacos/email/Taco.java
+/Users/dmitri/Learn/spring/sia5/taco-cloud/tacocloud-email/src/main/java/tacos/email/Order.java
+/Users/dmitri/Learn/spring/sia5/taco-cloud/tacocloud-email/src/main/java/tacos/email/OrderSubmitMessageHandler.java
+/Users/dmitri/Learn/spring/sia5/taco-cloud/tacocloud-email/src/main/java/tacos/email/TacoOrderEmailIntegrationConfig.java
 /Users/dmitri/Learn/spring/sia5/taco-cloud/tacocloud-email/src/main/java/tacos/email/ApiProperties.java
 /Users/dmitri/Learn/spring/sia5/taco-cloud/tacocloud-email/src/main/java/tacos/email/EmailProperties.java
+/Users/dmitri/Learn/spring/sia5/taco-cloud/tacocloud-email/src/main/java/tacos/email/Ingredient.java
+/Users/dmitri/Learn/spring/sia5/taco-cloud/tacocloud-email/src/main/java/tacos/email/EmailToOrderTransformer.java

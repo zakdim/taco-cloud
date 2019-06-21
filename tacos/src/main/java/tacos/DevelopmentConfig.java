@@ -48,10 +48,10 @@ public class DevelopmentConfig {
 				repo.save(spicy);
 
 				userRepo.save(new User("habuma", encoder.encode("password"), "Craig Walls", "123 North Street",
-						"Cross Roads", "TX", "76227", "123-123-1234"));
+						"Cross Roads", "TX", "76227", "123-123-1234", "habuma@mail.com"));
 
 				userRepo.save(new User("zakd", encoder.encode("zakd"), "Dmitri Zakharov", "123 North Street",
-						"Montreal", "QC", "H3N3N3", "123-123-1234"));
+						"Montreal", "QC", "H3N3N3", "123-123-1234", "zakd@mail.com"));
 
 				
 				Taco taco1 = new Taco();

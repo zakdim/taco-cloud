@@ -11,10 +11,27 @@ import org.springframework.integration.channel.PublishSubscribeChannel;
 import org.springframework.integration.channel.QueueChannel;
 import org.springframework.integration.dsl.IntegrationFlow;
 import org.springframework.integration.dsl.IntegrationFlows;
+import org.springframework.integration.dsl.Pollers;
+import org.springframework.integration.mail.dsl.Mail;
 import org.springframework.messaging.MessageChannel;
 
 @Configuration
 public class TacoOrderEmailIntegrationConfig {
+	
+	  @Bean
+	  public IntegrationFlow tacoOrderEmailFlow(
+	      EmailProperties emailProps,
+	      EmailToOrderTransformer emailToOrderTransformer,
+	      OrderSubmitMessageHandler orderSubmitHandler) {
+	    
+	    return IntegrationFlows
+	        .from(Mail.imapInboundAdapter(emailProps.getImapUrl()),
+	            e -> e.poller(
+	                Pollers.fixedDelay(emailProps.getPollRate())))
+	        .transform(emailToOrderTransformer)
+	        .handle(orderSubmitHandler)
+	        .get();
+	  }
 	
 //	@Bean
 //	public MessageChannel orderChannel() {
