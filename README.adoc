@@ -2,9 +2,9 @@
 
 https://www.manning.com/books/spring-in-action-fifth-edition[spring-in-action-fifth-edition @ Manning]
 
-== Taco Cloud Example Application - Chapter 9
+== Taco Cloud Example Application - Chapter 11
 
-https://github.com/habuma/spring-in-action-5-samples/tree/master/ch09[spring-in-action-5-samples @ GitHub]
+https://github.com/habuma/spring-in-action-5-samples/tree/master/ch11_12/tacocloud-mongodb[spring-in-action-5-samples @ GitHub]
 
 
 === Run from command line 

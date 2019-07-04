@@ -34,6 +34,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import lombok.extern.slf4j.Slf4j;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import tacos.Ingredient;
 import tacos.Ingredient.Type;
 import tacos.Order;
@@ -52,19 +54,34 @@ public class DesignTacoController {
 
     private TacoRepository tacoRepo;
 
-    @Autowired
-    EntityLinks entityLinks;
+//    @Autowired
+//    EntityLinks entityLinks;
 
     public DesignTacoController(TacoRepository tacoRepo) {
         this.tacoRepo = tacoRepo;
     }
-
-    	@GetMapping("/recent")
-    	public Iterable<Taco> recentTacos() {
-    		PageRequest page = PageRequest.of(
-    				0, 12, Sort.by("createdAt").descending());
-    		return tacoRepo.findAll(page).getContent();
-    	}
+    
+	@GetMapping("/recent")
+	public Flux<Taco> recentTacos() {
+		return tacoRepo.findAll().take(12);
+	}
+    
+	@PostMapping(consumes = "application/json")
+	@ResponseStatus(HttpStatus.CREATED)
+	public Mono<Taco> postTaco(@RequestBody Taco taco) {
+		return tacoRepo.save(taco);
+	}   	
+    	
+	@GetMapping("/{id}")
+	public Mono<Taco> tacoById(@PathVariable("id") String id) {
+		return tacoRepo.findById(id);
+	}
+	
+//	@GetMapping("/recent")
+//	public Iterable<Taco> recentTacos() {
+//		PageRequest page = PageRequest.of(0, 12, Sort.by("createdAt").descending());
+//		return tacoRepo.findAll(page).getContent();
+//	}
 
 //    @GetMapping("/recent")
 //    public Resources<TacoResource> recentTacos() {
@@ -117,18 +134,6 @@ public class DesignTacoController {
 //        
 //        return recentResources;
 //    }
-
-	@PostMapping(consumes = "application/json")
-	@ResponseStatus(HttpStatus.CREATED)
-	public Taco postTaco(@RequestBody Taco taco) {
-		return tacoRepo.save(taco);
-	}   	
-    	
-	@GetMapping("/{id}")
-	public Taco tacoById(@PathVariable("id") Long id) {
-		Optional<Taco> optTaco = tacoRepo.findById(id);
-		return optTaco.orElse(null);
-	}
 
 //    @GetMapping("/{id}")
 //    public ResponseEntity<Taco> tacoById(@PathVariable("id") Long id) {

@@ -27,12 +27,12 @@
 		<!-- TacoCloud dependencies -->
 		<dependency>
 			<groupId>sia</groupId>
-			<artifactId>tacocloud-data</artifactId>
+			<artifactId>tacocloud-data-mongodb</artifactId>
 			<version>${tacocloud.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>sia</groupId>
-			<artifactId>tacocloud-domain</artifactId>
+			<artifactId>tacocloud-domain-mongodb</artifactId>
 			<version>${tacocloud.version}</version>
 		</dependency>
 		<dependency>

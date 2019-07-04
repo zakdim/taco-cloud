@@ -27,7 +27,7 @@
 		<!-- TacoCloud dependencies -->
 		<dependency>
 			<groupId>sia</groupId>
-			<artifactId>tacocloud-domain</artifactId>
+			<artifactId>tacocloud-domain-mongodb</artifactId>
 			<version>${tacocloud.version}</version>
 		</dependency>
 
@@ -59,12 +59,4 @@
 
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 </project>
