@@ -66,11 +66,17 @@ public class DesignTacoController {
 		return tacoRepo.findAll().take(12);
 	}
     
+//	@PostMapping(consumes = "application/json")
+//	@ResponseStatus(HttpStatus.CREATED)
+//	public Mono<Taco> postTaco(@RequestBody Taco taco) {
+//		return tacoRepo.save(taco);
+//	}   
+	
 	@PostMapping(consumes = "application/json")
 	@ResponseStatus(HttpStatus.CREATED)
-	public Mono<Taco> postTaco(@RequestBody Taco taco) {
-		return tacoRepo.save(taco);
-	}   	
+	public Mono<Taco> postTaco(@RequestBody Mono<Taco> tacoMono) {
+		return tacoRepo.saveAll(tacoMono).next();
+	}
     	
 	@GetMapping("/{id}")
 	public Mono<Taco> tacoById(@PathVariable("id") String id) {
