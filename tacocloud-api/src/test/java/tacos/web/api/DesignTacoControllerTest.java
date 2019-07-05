@@ -6,6 +6,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.http.MediaType;
@@ -55,6 +56,7 @@ public class DesignTacoControllerTest {
 				.jsonPath("$[12]").doesNotExist();
 	}
 
+	@Ignore
 	@Test
 	public void shouldSaveATaco() {
 		TacoRepository tacoRepo = Mockito.mock(
