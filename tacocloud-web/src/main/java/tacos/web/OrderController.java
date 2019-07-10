@@ -34,7 +34,8 @@ public class OrderController {
 	}
 
 	@GetMapping("/current")
-	public String orderForm(@AuthenticationPrincipal User user, @ModelAttribute Order order) {
+	public String orderForm(@AuthenticationPrincipal User user, 
+			@ModelAttribute Order order) {
 		if (order.getDeliveryName() == null) {
 			order.setDeliveryName(user.getFullname());
 		}
@@ -55,7 +56,8 @@ public class OrderController {
 	}
 
 	@PostMapping
-	public String processOrder(@Valid Order order, Errors errors, SessionStatus sessionStatus,
+	public String processOrder(@Valid Order order, Errors errors, 
+			SessionStatus sessionStatus,
 			@AuthenticationPrincipal User user) {
 
 		if (errors.hasErrors()) {
@@ -71,10 +73,12 @@ public class OrderController {
 	}
 
 	@GetMapping
-	public String ordersForUser(@AuthenticationPrincipal User user, Model model) {
+	public String ordersForUser(
+			@AuthenticationPrincipal User user, Model model) {
 
 		Pageable pageable = PageRequest.of(0, props.getPageSize());
-		model.addAttribute("orders", orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
+		model.addAttribute("orders", 
+				orderRepo.findByUserOrderByPlacedAtDesc(user, pageable));
 
 		return "orderList";
 	}

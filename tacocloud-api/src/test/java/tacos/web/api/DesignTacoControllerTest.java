@@ -4,6 +4,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Ignore;
@@ -54,9 +55,16 @@ public class DesignTacoControllerTest {
 				.jsonPath("$[11].id").isEqualTo(tacos[11].getId().toString())
 				.jsonPath("$[11].name").isEqualTo("Taco 12")
 				.jsonPath("$[12]").doesNotExist();
+		
+		// version 2
+		testClient.get().uri("/design/recent")
+			.accept(MediaType.APPLICATION_JSON)
+			.exchange()
+			.expectStatus().isOk()
+			.expectBodyList(Taco.class)
+				.contains(Arrays.copyOf(tacos, 12));
 	}
 
-	@Ignore
 	@Test
 	public void shouldSaveATaco() {
 		TacoRepository tacoRepo = Mockito.mock(

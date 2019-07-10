@@ -17,21 +17,28 @@ import tacos.data.TacoRepository;
 @RepositoryRestController
 public class RecentTacosController {
 
-	private TacoRepository tacoRepo;
+  private TacoRepository tacoRepo;
 
-	public RecentTacosController(TacoRepository tacoRepo) {
-		this.tacoRepo = tacoRepo;
-	}
+  public RecentTacosController(TacoRepository tacoRepo) {
+    this.tacoRepo = tacoRepo;
+  }
 
-	@GetMapping(path = "/tacos/recent", produces = "application/hal+json")
-	public Mono<ResponseEntity<Resources<TacoResource>>> recentTacos() {
-		return tacoRepo.findAll().take(12).collectList().map(tacos -> {
-			List<TacoResource> tacoResources = new TacoResourceAssembler().toResources(tacos);
-			Resources<TacoResource> recentResources = new Resources<TacoResource>(tacoResources);
-
-			recentResources.add(linkTo(methodOn(RecentTacosController.class).recentTacos()).withRel("recents"));
-			return new ResponseEntity<>(recentResources, HttpStatus.OK);
-		});
-	}
+  @GetMapping(path="/tacos/recent", produces="application/hal+json")
+  public Mono<ResponseEntity<Resources<TacoResource>>> recentTacos() {
+    return tacoRepo.findAll()
+        .take(12)
+        .collectList()
+        .map(tacos -> {
+          List<TacoResource> tacoResources = 
+              new TacoResourceAssembler().toResources(tacos);
+          Resources<TacoResource> recentResources = 
+                  new Resources<TacoResource>(tacoResources);
+          
+          recentResources.add(
+              linkTo(methodOn(RecentTacosController.class).recentTacos())
+                  .withRel("recents"));
+          return new ResponseEntity<>(recentResources, HttpStatus.OK);
+        });
+  }
 
 }
